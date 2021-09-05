@@ -1,5 +1,7 @@
-from django.http import HttpResponse
+# coding: utf-8
+from django.shortcuts import render
 
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+def home(request):
+    """Method to render the homepage template"""
+    return render(request, 'pages/index.html')

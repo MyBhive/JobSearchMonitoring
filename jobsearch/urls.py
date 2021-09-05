@@ -1,7 +1,8 @@
+# coding: utf-8
 from django.urls import path
 
-from jobsearch.views import index
+from jobsearch.views import home
 
 urlpatterns = [
-    path('', index, name='index'),
+    path('', home, name='pages/index'),
 ]
