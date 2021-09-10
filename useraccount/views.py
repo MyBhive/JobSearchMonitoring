@@ -4,16 +4,18 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
 
-#from jobsearch.models import
-from .forms import SignInForm
+from useraccount.forms import UserAdminCreationForm
 
 
 def sign_in(request):
     """Method to allow the user to create an account"""
-    form = SignInForm()
+    form = UserAdminCreationForm
     if request.method == 'POST':
-        form = SignInForm(request.POST)
+        form = UserAdminCreationForm(request.POST)
         if form.is_valid():
             form.save()
             user = form.cleaned_data.get('email')
@@ -35,7 +37,7 @@ def log_in(request):
         password = request.POST.get('password')
 
         user = authenticate(request,
-                            username=email,
+                            email=email,
                             password=password
                             )
 
