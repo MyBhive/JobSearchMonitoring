@@ -66,7 +66,7 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff;
+  background: url("../assets/img/3436988.jpg");
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -159,7 +159,7 @@ sup {
 }
 
 a {
-  color: #f4623a;
+  color: #C67A2E;
   text-decoration: none;
   background-color: transparent;
 }
@@ -2438,8 +2438,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #f4623a;
-  border-color: #f4623a;
+  background-color: #c67a2e;
+  border-color: #c67a2e;
 }
 .btn-primary:hover {
   color: #fff;
@@ -4319,10 +4319,10 @@ input[type=button].btn-block {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+  background-color: transparent;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
+  border: 8px solid rgba(0, 0, 0, 0.125);
+  border-radius: 1.5rem;
 }
 .card > hr {
   margin-right: 0;
@@ -10007,7 +10007,7 @@ hr.light {
 }
 
 .page-section {
-  padding: 8rem 0;
+  padding: 6rem 0;
 }
 
 #mainNav {
@@ -10039,17 +10039,17 @@ hr.light {
     background-color: transparent;
   }
   #mainNav .navbar-brand {
-    color: rgba(255, 255, 255, 0.7);
+    color: #798398;
   }
   #mainNav .navbar-brand:hover {
-    color: #fff;
+    color: #c67a2e;
   }
   #mainNav .navbar-nav .nav-item .nav-link {
     color: rgba(255, 255, 255, 0.7);
     padding: 0 1rem;
   }
   #mainNav .navbar-nav .nav-item .nav-link:hover {
-    color: #fff;
+    color: #798398;
   }
   #mainNav .navbar-nav .nav-item:last-child .nav-link {
     padding-right: 0;
@@ -10059,13 +10059,13 @@ hr.light {
     background-color: #fff;
   }
   #mainNav.navbar-scrolled .navbar-brand {
-    color: #212529;
+    color: #798398;
   }
   #mainNav.navbar-scrolled .navbar-brand:hover {
     color: #f4623a;
   }
   #mainNav.navbar-scrolled .navbar-nav .nav-item .nav-link {
-    color: #212529;
+    color: #798398;
   }
   #mainNav.navbar-scrolled .navbar-nav .nav-item .nav-link:hover {
     color: #f4623a;
@@ -10075,7 +10075,7 @@ hr.light {
 header.masthead {
   padding-top: 10rem;
   padding-bottom: calc(10rem - 4.5rem);
-  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../assets/img/bg-masthead.jpg");
+  /* background: url("../assets/img/3436988.jpg"); */
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
