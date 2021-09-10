@@ -1,0 +1,56 @@
+{% extends 'pages/head_foot_nav.html' %}
+
+{% block title %}FAST JobResearch{% endblock %}
+
+{% block contenu %}
+
+<!-- Masthead-->
+<header class="masthead">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-10 align-self-middle  pb-3">
+                <img src="/static/assets/img/name_slogan.png" alt="name_slogan" class="mx-auto d-block" style="width:50%" />
+                <hr class="divider mt-5" />
+                <p class="pt-3">Personal follow-up on your job search.</p>
+                <p>Find a job on your favorites homepages, save it in your database and enjoy the clarity of the organisation.</p>
+                <hr class="divider my-4" />
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="page-section" id="categories_select">
+    <div class="container">
+        <div class="card-deck">
+          <div class="card">
+            <div class="card-body text-center">
+              <p class="card-text">Add a category</p>
+              <form class="form-inline-center">
+                <hr>
+                <input name="user_research" type="text" class="research-input form-control my-2" placeholder="ex: manager, consultant...">
+                <hr>
+                <button name="research" id="button_send" type="submit" class="btn btn-primary ml-2">Search</button>
+            </form>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body text-center">
+              <p class="card-text">See my categories</p>
+              <form class="form-inline-center">
+                <hr>
+                <button name="research" id="button_send" type="submit" class="btn btn-primary ml-2">Categories</button>
+            </form>
+            </div>
+          </div>  
+        </div>
+      </div>
+</section>
+{% if messages %}
+{% for message in messages %}
+<script>
+    alert("{{ message }}");
+    </script>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}
