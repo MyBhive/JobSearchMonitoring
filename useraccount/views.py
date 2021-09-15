@@ -20,7 +20,7 @@ def sign_in(request):
             form.save()
             user = form.cleaned_data.get('email')
             messages.success(request,
-                             'Compte ustilisateur créé pour '
+                             'User account creasted for'
                              + user
                              )
             return redirect('login')
@@ -47,7 +47,7 @@ def log_in(request):
 
         else:
             messages.info(request,
-                          'Identifiant ou mot de passe incorrect'
+                          'email or password incorrect'
                           )
 
     return render(request, 'userpages/login.html')
@@ -63,12 +63,4 @@ def log_out(request):
 def my_account(request):
     """Method To render the user account information's template"""
     return render(request, 'userpages/my_account.html')
-
-
-def change_email(request):
-    pass
-
-
-def change_password(request):
-    pass
 
