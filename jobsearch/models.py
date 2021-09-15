@@ -8,6 +8,9 @@ class Categories(models.Model):
     Class to create a table for the categories of job research
     """
     name_category = models.CharField(max_length=150, unique=True)
+    user = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE
+    )
 
     def __str__(self):
         return self.name_category
@@ -18,6 +21,7 @@ class JobOffer(models.Model):
     Class to create a table for jobs sheets
     """
     title = models.CharField(max_length=100)
+    company_name = models.CharField(max_length=150, null=False)
     url = models.URLField(max_length=500, null=False, blank=False)
     date = models.DateField(null=False, blank=False)
     salary = models.DecimalField(max_digits=19, decimal_places=3, null=False, blank=False)
@@ -59,10 +63,10 @@ class StatusConnect(models.Model):
     status_id = models.ForeignKey(
         Status, on_delete=models.CASCADE
     )
-    user_id = models.ForeignKey(
+    user_ref = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE
     )
-    job_id = models.ForeignKey(
+    job_ref = models.ForeignKey(
         JobOffer, on_delete=models.CASCADE
     )
 
@@ -98,7 +102,7 @@ class JobStyleConnect(models.Model):
     style_id = models.ForeignKey(
         StyleOfContract, on_delete=models.CASCADE
     )
-    job_id = models.ForeignKey(
+    job = models.ForeignKey(
         JobOffer, on_delete=models.CASCADE
     )
 
