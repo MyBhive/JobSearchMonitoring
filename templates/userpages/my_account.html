@@ -9,19 +9,21 @@
             <div class="d-flex justify-content-center h-100">
                 <div class="user_card my-auto" style="width: auto;">
                     <div class="d-flex justify-content-center pb-4 text-white">
-                        <h1 class="d-block text-center mb-5 text-white"
-                        style="margin-top: 4rem; text-shadow: 5px 1px 5px black, 0 0 25px black, 0 0 10px black;">
-                        Ahoy {{user.name}}</h1>
+                        <h1 class="d-block text-center mb-5"
+                        style="margin-top: 4rem; text-shadow: 5px 1px 5px black, 0 0 1px black, 0 0 1px black;">
+                        Hello {{user.first_name}}</h1>
                     </div>
                     <div class="results text-center">
-                        <p class="border rounded d-inline p-2 bg-light">mail : {{user.email}}
+                        <p class="p-2">Your email address is : <mark>{{user.email}}</mark>
                     </div>
                     <br>
                     <div class="results text-center">
-                        <p class="border rounded d-inline p-2 bg-light">date de naissance : {{user.date_of_birth}}
+                        <p class=" p-2">Your date of birth is : <mark>{{user.date_of_birth}}</mark>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 {% endblock %}
+
+
