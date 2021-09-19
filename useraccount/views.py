@@ -20,7 +20,7 @@ def sign_in(request):
             form.save()
             user = form.cleaned_data.get('email')
             messages.success(request,
-                             'User account creasted for'
+                             'User account created for '
                              + user
                              )
             return redirect('login')
