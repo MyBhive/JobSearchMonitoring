@@ -1,0 +1,53 @@
+﻿{% extends 'pages/head_foot_nav.html' %}
+
+{% block title %}Categories{% endblock %}
+
+{% block contenu %}
+
+{% if not cat or IndexError %}
+<header class="masthead">
+    <div class="container h-100">
+        <div class="d-flex justify-content-center h-100">
+            <div class="user_card my-auto" style="width: auto;">
+                <div class="d-flex justify-content-center pb-4 text-white">
+                    <h1 class="d-block text-center mb-5 text-white" 
+                    style="margin-top: 4rem; text-shadow: 5px 1px 5px black, 0 0 25px black, 0 0 10px black;">
+                    You didn't create any category yet</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    </header>
+{% else %}
+<header class="masthead" style="max-height: 20rem;">
+    <div class="container h-100">
+        <div class="d-flex justify-content-center h-100">
+            <div class="user_card my-auto" style="width: auto;">
+                <div class="d-flex justify-content-center pb-4 text-white">
+                    <h1 class="d-block text-center mb-5 text-white" 
+                    style="margin-top: 4rem; text-shadow: 5px 1px 5px black, 0 0 25px black, 0 0 10px black;">
+                    Your category(ies)</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="page-section bg-white">
+    <div class="container">
+        <div class="row d-flex justify-content-between justify-content-lg-around text-center">
+            {% for element in cat %}
+                <div class="card p-2 mb-5 mx-lg-2 col-lg-3 col-md-5 col-8 offset-2 offset-md-0" style="width:300px; margin-bottom: 4em;">
+                    <a name="enter_cat" href="{% url 'enter_category' id_cat=element.id %}">
+                        <h5>{{ element }}</h5>
+                    </a>
+                    <hr>
+                    <a name="delete" href="{% url 'delete_category' cat_id=element.id %}" style="margin-bottom: 1em;">
+                        <button name="delete" id="button_send"  type="submit" class="btn btn-primary ml-2"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}
