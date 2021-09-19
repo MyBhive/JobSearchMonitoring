@@ -36,5 +36,6 @@ urlpatterns = [
              template_name='userpages/password_reset_complete.html'
          ),
          name='password_reset_complete'),
-    path('mon_compte/', views.my_account, name='my_account'),
+
+    path('my_account/', views.my_account, name='my_account'),
 ]
