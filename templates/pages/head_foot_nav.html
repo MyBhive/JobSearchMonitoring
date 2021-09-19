@@ -43,7 +43,7 @@
                     <ul class="navbar-nav ml-auto my-2 my-lg-0 d-flex align-items-center">
                         <li class="nav-item ">
                             <form class="form-inline d-flex">
-                                <input name="user_research" type="text" class="product-input form-control my-2" placeholder="search one of my job">
+                                <input name="user_research" type="text" class="product-input form-control my-2" placeholder="research in my saving">
                                 <button name="research" id="button_send" type="submit" class="btn btn-primary ml-2">Search</button>
                             </form>
                         </li>
@@ -52,17 +52,17 @@
 
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="{% url 'my_account' %}">
-                                <i title="my-account" class="fas fa-user-circle fa-2x mb-0" style="color: black;"></i>
+                                <i title="my account" class="fas fa-user-circle fa-2x mb-0" style="color: black;"></i>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger">
-                                <i title="saving" class="fas fa-save fa-2x mb-0"  style="color: black;"></i>
+                            <a class="nav-link js-scroll-trigger" href="{% url 'see_categories' %}" class="form-inline-center">
+                                <i title="categories" class="fas fa-save fa-2x mb-0"  style="color: black;"></i>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="{% url 'log_out' %}">
-                                <i title="déconnexion" class="fas fa-share-square fa-2x mb-0" style="color: black;"></i>
+                                <i title="log out" class="fas fa-share-square fa-2x mb-0" style="color: black;"></i>
                             </a>
 
                         {% else %}
@@ -73,7 +73,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="{% url 'sign_in' %}">
-                                <i title="to registrate" class="fas fa-user-plus fa-2x mb-0" style="color: black;"></i>
+                                <i title="to register" class="fas fa-user-plus fa-2x mb-0" style="color: black;"></i>
                             </a>
                         </li>
 
