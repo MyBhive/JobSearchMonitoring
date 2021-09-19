@@ -60,6 +60,10 @@ class Status(models.Model):
 
 
 class StatusConnect(models.Model):
+    """
+    Class to create a table to join the status
+    to the user and the specific job offer
+    """
     status_id = models.ForeignKey(
         Status, on_delete=models.CASCADE
     )
