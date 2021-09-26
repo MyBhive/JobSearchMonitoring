@@ -1,6 +1,7 @@
 # coding: utf-8
 from django.urls import path
-
+from .views import JobOfferView, JobOfferDetailView
+from .forms import CreateJobOffer
 from . import views
 
 urlpatterns = [
@@ -12,5 +13,7 @@ urlpatterns = [
     path('enter_category/<str:id_cat>/', views.enter_category, name='enter_category'),
     path('delete_category/<str:cat_id>', views.delete_category, name='delete_category'),
     path('add_job_offer', views.add_job_offer, name='add_job_offer'),
-    path('job_description', views.see_job_offer, name='job_description'),
+    path('job_description/<int:id_cat>', JobOfferView.as_view(), name='job_description'),
+    path('job_detail/<int:pk>', JobOfferDetailView.as_view(), name='job_detail'),
+    path('add_job/<int:id_cat>', CreateJobOffer.as_view(), name='add_job'),
 ]
