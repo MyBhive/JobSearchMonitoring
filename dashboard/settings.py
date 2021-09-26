@@ -99,7 +99,7 @@ WSGI_APPLICATION = 'dashboard.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'jobmonitor',
+        'NAME': 'trydb',
         'USER': 'postgres',
         'PASSWORD': '007',
         'HOST': 'localhost',

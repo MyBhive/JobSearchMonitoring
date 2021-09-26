@@ -210,4 +210,3 @@ def search_job_offer_saved(request):
     the database through the research bar
     """
     pass
-
