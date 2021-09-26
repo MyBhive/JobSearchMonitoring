@@ -1,6 +1,7 @@
 # coding: utf-8
 from django.db import models
 from useraccount.models import CustomUser
+from django.urls import reverse
 
 
 class Categories(models.Model):
@@ -25,7 +26,7 @@ class JobOffer(models.Model):
     url = models.URLField(max_length=500, null=False, blank=False)
     date = models.DateField(null=False, blank=False)
     salary = models.DecimalField(max_digits=19, decimal_places=3, null=False, blank=False)
-    comments = models.CharField(max_length=800, null=True, blank=True)
+    comments = models.TextField(max_length=800, null=True, blank=True)
     category_id = models.ForeignKey(
         Categories, on_delete=models.CASCADE
     )
@@ -35,6 +36,9 @@ class JobOffer(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('job_detail', args=(str(self.pk)))
 
 
 class InfoUpload(models.Model):
@@ -106,7 +110,7 @@ class JobStyleConnect(models.Model):
     style_id = models.ForeignKey(
         StyleOfContract, on_delete=models.CASCADE
     )
-    job = models.ForeignKey(
+    job_id = models.ForeignKey(
         JobOffer, on_delete=models.CASCADE
     )
 
