@@ -32,7 +32,7 @@
         </div>
     </div>
 </header>
-<section class="page-section bg-white">
+<section class="page-section">
     <div class="container">
         <div class="row d-flex justify-content-between justify-content-lg-around text-center">
             {% for element in cat %}
@@ -49,5 +49,13 @@
         </div>
     </div>
 </section>
+{% endif %}
+{% if messages %}
+{% for message in messages %}
+<script>
+    alert("{{ message }}");
+    </script>
+
+{% endfor %}
 {% endif %}
 {% endblock %}
