@@ -2,10 +2,22 @@
 from django.shortcuts import render, redirect
 from jobsearch.models import *
 from django.contrib.auth.decorators import login_required
-from django.db import IntegrityError
-from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
+from django.db import IntegrityError, ProgrammingError
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+
+
+class JobOfferView(ListView):
+    model = JobOffer
+    template_name = 'pages/job_description.html'
+
+
+class JobOfferDetailView(DetailView):
+    model = JobOffer
+    template_name = 'pages/job_detail.html'
 
 
 def home(request):
@@ -80,15 +92,42 @@ def enter_category(request, id_cat):
     user = request.user
     cat_name = Categories.objects.get(user_id=user.id, id=id_cat)
     basic_job_info = JobOffer.objects.filter(user_id=user.id, category_id=id_cat)
-    # interview_info = make a join to get the status
-    # status = paginate de status
-    # bloc try except; Try the filter / except ObjectDoesntExist render 'no job offer in this category yet'
 
-    context = {
-        'title': cat_name
-    }
+    if basic_job_info:
+        context = {
+            'title': cat_name,
+            'id_cat': id_cat,
+            'basic': basic_job_info
+        }
+
+    else:
+        basic_job_info = []
+        context = {
+            'title': cat_name,
+            'id_cat': id_cat,
+            'basic': basic_job_info
+        }
 
     return render(request, 'pages/enter_category.html', context)
+
+
+@login_required(login_url='login')
+def delete_category(request, cat_id):
+    """
+    Method to delete a category only if it is empty
+    """
+    user = request.user
+    cat_to_delete = Categories.objects.get(user_id=user.id, id=cat_id)
+    try:
+        cat_to_delete.delete()
+        messages.success(request, 'category deleted')
+
+        return redirect('home')
+
+    except ProgrammingError:
+        messages.info(request, 'This category is not empty and cannot be deleted')
+
+        return redirect('see_categories')
 
 
 @login_required(login_url='login')
@@ -149,7 +188,7 @@ def delete_job_offer(request, job_id):
     """
     # add message are you sure you want to delete it yes/no
     user = request.user
-    job_to_delete = JobOffer.objects.geet(user_id=user, id=job_id)
+    job_to_delete = JobOffer.objects.get(user_id=user, id=job_id)
     try:
         job_to_delete.delete()
         messages.success(request, 'job deleted')
@@ -160,54 +199,5 @@ def delete_job_offer(request, job_id):
         messages.success(request, 'This job offer does not exist')
 
         return redirect('enter_category')
-    pass
-
-
-@login_required(login_url='login')
-def delete_category(request, cat_id):
-    """
-    Method to delete a category only if it is empty
-    """
-    # add condition that it can be deleted only if the cat is empty not empty
-    # with a message are you sure you want to delete it yes/no
-    # or no try except but a condition if cat [] delete else message 'category not empty impossible to delete'
-    user = request.user
-    cat_to_delete = Categories.objects.get(user_id=user.id, id=cat_id)
-    try:
-        cat_to_delete.delete()
-        messages.success(request, 'category deleted')
-
-        return redirect('see_categories')
-
-    except PermissionDenied:
-        if cat_to_delete is not None:
-            messages.info(request, 'This category is not empty and cannot be deleted')
-
-        return redirect('see_categories')
-
-
-@login_required(login_url='login')
-def modify_status_on_job_offer(request):
-    """
-    Method to update the status from a job offer
-    """
-    pass
-
-
-@login_required(login_url='login')
-def add_job_interview_on_job_offer(request):
-    """
-    Method to add date and time
-    for a job interview to a job offer
-    """
-    pass
-
-
-@login_required(login_url='login')
-def search_job_offer_saved(request):
-    """
-    Method to find a job offer saved inside
-    the database through the research bar
-    """
     pass
 
