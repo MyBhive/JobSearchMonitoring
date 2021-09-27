@@ -6,7 +6,7 @@ from django.db import IntegrityError, ProgrammingError
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.core.paginator import Paginator
-from django.views.generic import ListView
+from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
 
@@ -128,16 +128,6 @@ def delete_category(request, cat_id):
         messages.info(request, 'This category is not empty and cannot be deleted')
 
         return redirect('see_categories')
-
-
-@login_required(login_url='login')
-def add_job_offer(request):
-    """
-    Method to add a job offer and
-    his description to a category
-    """
-    # create a forms.py and a formular first?
-    return render(request, 'pages/add_job_offer.html')
 
 
 @login_required(login_url='login')

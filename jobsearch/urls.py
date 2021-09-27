@@ -12,7 +12,6 @@ urlpatterns = [
     path('add_categories', views.add_category, name='add_categories'),
     path('enter_category/<str:id_cat>/', views.enter_category, name='enter_category'),
     path('delete_category/<str:cat_id>', views.delete_category, name='delete_category'),
-    path('add_job_offer', views.add_job_offer, name='add_job_offer'),
     path('job_description/<int:id_cat>', JobOfferView.as_view(), name='job_description'),
     path('job_detail/<int:pk>', JobOfferDetailView.as_view(), name='job_detail'),
     path('add_job/<int:id_cat>', CreateJobOffer.as_view(), name='add_job'),
