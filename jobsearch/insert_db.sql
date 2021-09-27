@@ -59,3 +59,17 @@ VALUES
 ('Mi-temps'),
 ('Extras'),
 ('autres');
+
+
+INSERT INTO public.jobsearch_joboffer (title, company_name, url, date, salary, comments, category_id_id, status_id_id, style_id_id, type_id_id, user_id_id)
+values ('dev python',
+		'oc',
+		'https://www.studi.com/fr/formation/gestion-de-projet/mba-chief-digital-officer',
+		'26/09/2021',
+		'33000',
+		'Identifier les compétences et outils nécessaires au développement dune stratégie digitale. Concevoir et déployer une stratégie de marketing digital de A à Z. Gérer un projet digital. Conduire le changement et accompagner linnovation. Elaborer une solution technologique et maîtriser les langages de programmation associés',
+		1,
+		2,
+		3,
+		1,
+		1)
