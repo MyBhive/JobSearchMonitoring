@@ -17,30 +17,6 @@ class Categories(models.Model):
         return self.name_category
 
 
-class JobOffer(models.Model):
-    """
-    Class to create a table for jobs sheets
-    """
-    title = models.CharField(max_length=100)
-    company_name = models.CharField(max_length=150, null=False)
-    url = models.URLField(max_length=500, null=False, blank=False)
-    date = models.DateField(null=False, blank=False)
-    salary = models.DecimalField(max_digits=19, decimal_places=3, null=False, blank=False)
-    comments = models.TextField(max_length=800, null=True, blank=True)
-    category_id = models.ForeignKey(
-        Categories, on_delete=models.CASCADE
-    )
-    user_id = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE
-    )
-
-    def __str__(self):
-        return self.title
-
-    def get_absolute_url(self):
-        return reverse('job_detail', args=(str(self.pk)))
-
-
 class InfoUpload(models.Model):
     """
     Class to create a table to upload
@@ -61,22 +37,6 @@ class Status(models.Model):
 
     def __str__(self):
         return self.advanced
-
-
-class StatusConnect(models.Model):
-    """
-    Class to create a table to join the status
-    to the user and the specific job offer
-    """
-    status_id = models.ForeignKey(
-        Status, on_delete=models.CASCADE
-    )
-    user_ref = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE
-    )
-    job_ref = models.ForeignKey(
-        JobOffer, on_delete=models.CASCADE
-    )
 
 
 class InterviewDate(models.Model):
@@ -102,19 +62,6 @@ class StyleOfContract(models.Model):
         return self.style
 
 
-class JobStyleConnect(models.Model):
-    """
-    Class to create a table to join the job offer
-    to the style of contract
-    """
-    style_id = models.ForeignKey(
-        StyleOfContract, on_delete=models.CASCADE
-    )
-    job_id = models.ForeignKey(
-        JobOffer, on_delete=models.CASCADE
-    )
-
-
 class TypeOfContract(models.Model):
     """
     Class to create a table to define the type of contract is saved
@@ -125,14 +72,37 @@ class TypeOfContract(models.Model):
         return self.type
 
 
-class JobTypeConnect(models.Model):
+class JobOffer(models.Model):
     """
-    Class to create a table to join the job offer
-    to the style of contract
+    Class to create a table for jobs sheets
     """
+    title = models.CharField(max_length=100)
+    company_name = models.CharField(max_length=150, null=False)
+    url = models.URLField(max_length=500, null=False, blank=False)
+    date = models.DateField(null=False, blank=False)
+    salary = models.DecimalField(max_digits=19, decimal_places=3, null=False, blank=False)
+    comments = models.TextField(max_length=800, null=True, blank=True)
+    category_id = models.ForeignKey(
+        Categories, on_delete=models.CASCADE
+    )
+    user_id = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE
+    )
+    status_id = models.ForeignKey(
+        Status, on_delete=models.CASCADE
+    )
+    style_id = models.ForeignKey(
+        StyleOfContract, on_delete=models.CASCADE
+    )
     type_id = models.ForeignKey(
         TypeOfContract, on_delete=models.CASCADE
     )
-    job_id = models.ForeignKey(
-        JobOffer, on_delete=models.CASCADE
+    info_id = models.ForeignKey(
+        InfoUpload, on_delete=models.CASCADE, null=True
     )
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('job_detail', args=(str(self.pk)))
