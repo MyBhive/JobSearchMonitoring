@@ -1,18 +1,32 @@
-﻿from django.views.generic import CreateView
-from jobsearch.models import *
+﻿from django import forms
+from .models import JobOffer
 
 
-class CreateJobOffer(CreateView):
-    model = JobOffer
-    template_name = 'pages/add_job.html'
-    fields = (
-        'title',
-        'company_name',
-        'url',
-        'date',
-        'salary',
-        'comments',
-        'status_id',
-        'style_id',
-        'type_id',
-    )
+class JobOfferForm(forms.ModelForm):
+    class Meta:
+        model = JobOffer
+        fields = (
+            'category_id',
+            'user_id',
+            'title',
+            'company_name',
+            'url',
+            'salary',
+            'comments',
+            'status_id',
+            'style_id',
+            'type_id',
+            'cv',
+            'motiv_letter',
+        )
+        widgets = {
+            'category_id': forms.Select(attrs={'class': 'form-control'}),
+            'user_id': forms.TextInput(attrs={'class': 'form-control', 'value': '', 'id': 'actual-user', 'type': 'hidden'}),
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'job name...'}),
+            'url': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'https://...'}),
+            'company_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'company...'}),
+            'comments': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'write your own comment here...'}),
+            'status_id': forms.Select(choices='choice_list', attrs={'class': 'form-control'}),
+            'style_id': forms.Select(attrs={'class': 'form-control'}),
+            'type_id': forms.Select(attrs={'class': 'form-control'}),
+        }
