@@ -1,6 +1,6 @@
-﻿{% extends 'pages/head_foot_nav.html' %}
+{% extends 'pages/head_foot_nav.html' %}
 
-{% block title %}Add job offer{% endblock %}
+{% block title %}Delete job offer{% endblock %}
 
 {% block contenu %}
 <header class="masthead" style="max-height: 20rem;">
@@ -10,7 +10,7 @@
                 <div class="d-flex justify-content-center pb-4 text-white">
                     <h1 class="d-block text-center mb-5 text-white" 
                     style="margin-top: 4rem; text-shadow: 5px 1px 5px black, 0 0 25px black, 0 0 10px black;">
-                    Add job offer</h1>
+                    Delete {{ joboffer.title }}</h1>
                 </div>
             </div>
         </div>
@@ -18,19 +18,12 @@
 </header>
 <section class="page-section">
     <div class="container">
-        <div class="form-group">
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" value="Upload File" class="btn btn-secondary">Post</button>
-            </form>
-        </div>
+        <form method="POST">
+            {% csrf_token %}
+            <strong>Are you sure you want to delete {{ joboffer.title }}</strong>
+            <button type="submit" class="btn btn-secondary">Delete</button>
+        </form>
     </div>
-
-    <script>
-        var name = "{{ user.id }}";
-        document.getElementById("actual-user").value = name;
-    </script>
 </section>
 
 {% endblock %}
