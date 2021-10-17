@@ -2,17 +2,27 @@
 from django.shortcuts import render, redirect
 from jobsearch.models import *
 from django.contrib.auth.decorators import login_required
-from django.db import IntegrityError, ProgrammingError
+from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
-from django.core.paginator import Paginator
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from .forms import JobOfferForm
 
 
 class JobOfferView(ListView):
-    model = JobOffer
     template_name = 'pages/job_description.html'
+    context_object_name = 'job_list'
+
+    def get_queryset(self):
+        return JobOffer.objects.order_by('date')
+
+    def get_context_data(self, **kwargs):
+        context = super(JobOfferView, self).get_context_data(**kwargs)
+        context['status_list'] = Status.objects.all()
+        return context
 
 
 class JobOfferDetailView(DetailView):
@@ -67,13 +77,8 @@ def see_categories(request):
     user = request.user
     try:
         categories_view = Categories.objects.filter(user_id=user.id).order_by('id')
-        paginate = Paginator(categories_view, 99)
-        page = request.GET.get('page')
-        pag_num = paginate.get_page(page)
 
         context = {
-            'page_num': pag_num,
-            'paginate': True,
             'cat': categories_view
         }
 
@@ -117,26 +122,36 @@ def delete_category(request, cat_id):
     Method to delete a category only if it is empty
     """
     user = request.user
+    cat_content = JobOffer.objects.filter(category_id__id=cat_id)
     cat_to_delete = Categories.objects.get(user_id=user.id, id=cat_id)
-    try:
+    if not cat_content:
         cat_to_delete.delete()
         messages.success(request, 'category deleted')
 
         return redirect('home')
 
-    except ProgrammingError:
+    else:
         messages.info(request, 'This category is not empty and cannot be deleted')
 
         return redirect('see_categories')
 
 
-@login_required(login_url='login')
-def modify_job_offer(request):
-    """
-    Method to modify elements from a job offer
-    """
-    # queryset to modify. Conditions if request.GET.get('company_name') if ('name')
-    pass
+class CreateJobOffer(CreateView):
+    model = JobOffer
+    form_class = JobOfferForm
+    template_name = 'pages/add_job.html'
+
+
+class UpdateJobOffer(UpdateView):
+    model = JobOffer
+    form_class = JobOfferForm
+    template_name = 'pages/update_job_offer.html'
+
+
+class DeleteJobOffer(DeleteView):
+    model = JobOffer
+    template_name = 'pages/delete_job_offer.html'
+    success_url = reverse_lazy('home')
 
 
 @login_required(login_url='login')
@@ -145,49 +160,17 @@ def select_status(request, status_id):
     Method to select a status and paginate all
     the job offer belonging to this status
     """
-    # status = inner join StatusConnect and Status to get the status id .order_by('id')
-    pass
-
-
-@login_required(login_url='login')
-def see_job_offer(request, job_description):
-    """
-    Method to see the description and
-    information inside a job offer card
-    """
     user = request.user
-    job = JobOffer.objects.get(user_id=user, id=job_description)
+    status_filtered = JobOffer.objects.filter(
+        user_id=user,
+        status_id=status_id)\
+        .order_by('date'
+                  )
 
     context = {
-        'title': job.title,
-        'company_name': job.company_name,
-        'url': job.url,
-        'date': job.date,
-        'salary': job.salary,
-        'comments': job.comments
+        'status_filtered': status_filtered
     }
 
-    return render(request, 'pages/job_description.html', context)
-    pass
+    return render(request, 'pages/status_select.html', context)
 
-
-@login_required(login_url='login')
-def delete_job_offer(request, job_id):
-    """
-    Method to delete a job offer from the database
-    """
-    # add message are you sure you want to delete it yes/no
-    user = request.user
-    job_to_delete = JobOffer.objects.get(user_id=user, id=job_id)
-    try:
-        job_to_delete.delete()
-        messages.success(request, 'job deleted')
-
-        return redirect('enter_category')
-
-    except ObjectDoesNotExist:
-        messages.success(request, 'This job offer does not exist')
-
-        return redirect('enter_category')
-    pass
 
