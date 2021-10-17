@@ -1,11 +1,48 @@
-﻿
+﻿{% extends 'pages/head_foot_nav.html' %}
 
-<ul>
-{% for element in object_list %}
-    <li><a href="{% url 'job_detail' element.pk %}"> {{ element.title }}</a><br/>
-    {{ element.company_name }}<br/>
-    {{ element.url }}<br/>
-    {{ element.date }}</li>
+{% block title %}Job description{% endblock %}
 
-{% endfor %}
-</ul>
+{% block contenu %}
+<header class="masthead" style="max-height: 20rem;">
+    <div class="container h-100">
+        <div class="d-flex justify-content-center h-100">
+            <div class="user_card my-auto" style="width: auto;">
+                <div class="d-flex justify-content-center pb-4 text-white">
+                    <h1 class="d-block text-center mb-5 text-white" 
+                    style="margin-top: 4rem; text-shadow: 5px 1px 5px black, 0 0 25px black, 0 0 10px black;">
+                    Job saved </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link active" href="#">Active</a>
+    </li>
+        {% for element in status_list %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'status_select' element.id %}">{{ element }}</a>
+        {% endfor %}
+  </ul>
+<section class="page-section">
+    <div class="container">
+        <div>
+        </div>
+        <div>
+            <ul>
+                {% for element in job_list %}
+                    <li><a href="{% url 'job_detail' element.pk %}"> {{ element.title }}</a><br/>
+                    {{ element.company_name }}<br/>
+                    {{ element.status_id }}
+                    {{ element.type_id }}
+                    {{ element.style_id }}<br/>
+                    {{ element.category_id_id }}<br/>
+                    {{ id_cat }}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
