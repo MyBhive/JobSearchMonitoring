@@ -11,7 +11,7 @@
               <div class="d-flex justify-content-center pb-4 text-white">
                   <h1 class="d-block text-center mb-5 text-white" 
                   style="margin-top: 4rem; text-shadow: 5px 1px 5px black, 0 0 25px black, 0 0 10px black;">
-                  {{ title }}</h1>
+                  {{ title }} {{ id_cat }}</h1>
               </div>
           </div>
       </div>
@@ -42,7 +42,7 @@
   <div class="col-lg-10 mx-auto d-flex" style="margin: 64px 2px 64px 2px;">
       <div class="card mx-auto align-items-center text-center" style="width:300px; margin: 64px 2px 64px 2px; padding: 0.5rem;">
         <a href="{% url 'job_description' id_cat %}">
-          <h3>See the job offer(s)</h3>
+          <h3>See the job offer(s) {{ id_cat }}</h3>
         </a>
       </div>
 
