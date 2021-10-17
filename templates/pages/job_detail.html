@@ -1,3 +1,45 @@
-﻿
-<h1>{{ object.title }}<br/></h1>
-<p> the company name is: {{ object.company_name }}<br/></p>
+﻿{% extends 'pages/head_foot_nav.html' %}
+
+{% block title %}Job detail{% endblock %}
+
+{% block contenu %}
+<header class="masthead" style="max-height: 20rem;">
+    <div class="container h-100">
+        <div class="d-flex justify-content-center h-100">
+            <div class="user_card my-auto" style="width: auto;">
+                <div class="d-flex justify-content-center pb-4 text-white">
+                    <h1 class="d-block text-center mb-5 text-white" 
+                    style="margin-top: 4rem; text-shadow: 5px 1px 5px black, 0 0 25px black, 0 0 10px black;">
+                    {{ object.title }}  -  {{ object.category_id_id }}  -  {{ user.id }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="page-section">
+    <div class="container" method="POST" enctype="multipart/form-data">
+        <p> the company name is: {{ object.company_name }}<br/></p>
+        <p> click to the link: <a href='{{ object.url }}'> click</a></p>
+        <p> saving date: {{ object.date }}</p>
+        <p> salary: {{ object.salary }} euros</p>
+        <p> actual status: {{ object.status_id }}</p>
+        <p> contract: {{ object.style_id }} {{ object.type_id }}</p>
+        <p> comments: {{ object.comments }}</p>
+        {% if object.cv %}
+        <p> cv: <a href='{{ object.cv.url }}'> click</a></p>
+        {% endif %}
+        {% if object.motiv_letter %}
+        <p> motivation letter: <a href='{{ object.motiv_letter.url }}'> click</a></p>
+        {% endif %}
+        <a href="{% url 'update_job' joboffer.pk %}" class="form-inline-center">
+            <hr>
+              <button type="submit" class="btn btn-primary ml-2">Edit</button>
+          </a>
+          <a href="{% url 'delete_job' joboffer.pk %}" class="form-inline-center">
+            <hr>
+              <button type="submit" class="btn btn-primary ml-2">Delete</button>
+          </a>
+    </div>
+</section>
+
+{% endblock %}
