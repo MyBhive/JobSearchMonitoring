@@ -18,6 +18,9 @@
 </header>
 <section class="page-section">
     <div class="container">
+        {% for message in messages %}
+        <p class="d-flex justify-content-center mt-4 " style="color: #ec081b;">{{message}}</p>
+        {% endfor %}
         {% for element in status_filtered %}
         <p>{{ element.title }}</p>
         {% endfor %}

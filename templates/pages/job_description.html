@@ -20,7 +20,7 @@
     <li class="nav-item">
       <a class="nav-link active" href="#">Active</a>
     </li>
-        {% for element in status_list %}
+        {% for element in status %}
     <li class="nav-item">
       <a class="nav-link" href="{% url 'status_select' element.id %}">{{ element }}</a>
         {% endfor %}
@@ -31,7 +31,7 @@
         </div>
         <div>
             <ul>
-                {% for element in job_list %}
+                {% for element in jobs %}
                     <li><a href="{% url 'job_detail' element.pk %}"> {{ element.title }}</a><br/>
                     {{ element.company_name }}<br/>
                     {{ element.status_id }}
