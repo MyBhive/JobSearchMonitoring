@@ -5,44 +5,34 @@ from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
-from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .forms import JobOfferForm
 
 
-class JobOfferView(ListView):
-    template_name = 'pages/job_description.html'
-    context_object_name = 'job_list'
-
-    def get_queryset(self):
-        return JobOffer.objects.order_by('date')
-
-    def get_context_data(self, **kwargs):
-        context = super(JobOfferView, self).get_context_data(**kwargs)
-        context['status_list'] = Status.objects.all()
-        return context
-
-
-class JobOfferDetailView(DetailView):
-    model = JobOffer
-    template_name = 'pages/job_detail.html'
-
-
 def home(request):
-    """Method to render the homepage template"""
+    """
+    Method to render the homepage template
+    """
     return render(request, 'pages/home.html')
 
 
 def legal_notices(request):
-    """Method to render the legal notices template"""
+    """
+    Method to render the legal notices template
+    """
     return render(request, 'pages/legal_notices.html')
 
 
 def contact(request):
-    """Method to render the contact template"""
-    return render(request, 'pages/contact.html')
+    """
+    Method to render the contact template
+    """
+    return render(
+        request,
+        'pages/contact.html'
+    )
 
 
 @login_required(login_url='login')
@@ -53,7 +43,10 @@ def add_category(request):
     user = request.user
     cat_name = request.GET.get('add_category')
     try:
-        Categories.objects.create(user_id=user.id, name_category=cat_name)
+        Categories.objects.create(
+            user_id=user.id,
+            name_category=cat_name
+        )
 
     except IntegrityError:
 
@@ -76,16 +69,25 @@ def see_categories(request):
     """
     user = request.user
     try:
-        categories_view = Categories.objects.filter(user_id=user.id).order_by('id')
+        categories_view = Categories.objects.filter(
+            user_id=user.id
+        ).order_by('id')
 
         context = {
             'cat': categories_view
         }
 
     except ObjectDoesNotExist:
-        return render(request, 'pages/categories.html')
+        return render(
+            request,
+            'pages/categories.html'
+        )
 
-    return render(request, 'pages/categories.html', context)
+    return render(
+        request,
+        'pages/categories.html',
+        context
+    )
 
 
 @login_required(login_url='login')
@@ -95,8 +97,14 @@ def enter_category(request, id_cat):
     which job offer are already saved in
     """
     user = request.user
-    cat_name = Categories.objects.get(user_id=user.id, id=id_cat)
-    basic_job_info = JobOffer.objects.filter(user_id=user.id, category_id=id_cat)
+    cat_name = Categories.objects.get(
+        user_id=user.id,
+        id=id_cat
+    )
+    basic_job_info = JobOffer.objects.filter(
+        user_id=user.id,
+        category_id=id_cat
+    )
 
     if basic_job_info:
         context = {
@@ -113,7 +121,11 @@ def enter_category(request, id_cat):
             'basic': basic_job_info
         }
 
-    return render(request, 'pages/enter_category.html', context)
+    return render(
+        request,
+        'pages/enter_category.html',
+        context
+    )
 
 
 @login_required(login_url='login')
@@ -122,8 +134,13 @@ def delete_category(request, cat_id):
     Method to delete a category only if it is empty
     """
     user = request.user
-    cat_content = JobOffer.objects.filter(category_id__id=cat_id)
-    cat_to_delete = Categories.objects.get(user_id=user.id, id=cat_id)
+    cat_content = JobOffer.objects.filter(
+        category_id__id=cat_id
+    )
+    cat_to_delete = Categories.objects.get(
+        user_id=user.id,
+        id=cat_id
+    )
     if not cat_content:
         cat_to_delete.delete()
         messages.success(request, 'category deleted')
@@ -131,24 +148,73 @@ def delete_category(request, cat_id):
         return redirect('home')
 
     else:
-        messages.info(request, 'This category is not empty and cannot be deleted')
+        messages.info(
+            request,
+            'This category is not empty and cannot be deleted'
+        )
 
         return redirect('see_categories')
 
 
+def job_offers_views(request, cate_id):
+    """
+    Function to render the jobs attached to a category
+    """
+    user = request.user
+    jobs = JobOffer.objects.filter(
+        user_id=user,
+        category_id_id=cate_id
+    ).order_by('date')
+
+    status = Status.objects.all()
+
+    context = {
+        'jobs': jobs,
+        'status': status,
+    }
+
+    return render(
+        request,
+        'pages/job_description.html',
+        context
+    )
+
+
+class JobOfferDetailView(DetailView):
+    """
+    Class with basicview to render
+    the details of a specific job offer
+    """
+    model = JobOffer
+    template_name = 'pages/job_detail.html'
+
+
 class CreateJobOffer(CreateView):
+    """
+    Class with basicview to render
+    a formular for creating a job offer
+    """
     model = JobOffer
     form_class = JobOfferForm
     template_name = 'pages/add_job.html'
 
 
 class UpdateJobOffer(UpdateView):
+    """
+    Class with basicview to render
+    a formular to update
+    the informations from a job offer
+    """
     model = JobOffer
     form_class = JobOfferForm
     template_name = 'pages/update_job_offer.html'
 
 
 class DeleteJobOffer(DeleteView):
+    """
+    Class with basicview
+    to delete a specific job offer
+    """
     model = JobOffer
     template_name = 'pages/delete_job_offer.html'
     success_url = reverse_lazy('home')
@@ -166,11 +232,22 @@ def select_status(request, status_id):
         status_id=status_id)\
         .order_by('date'
                   )
+    if not status_filtered:
+        messages.info(
+            request,
+            'No jobs saved under this status yet'
+        )
+        return render(request, 'pages/status_select.html')
 
-    context = {
-        'status_filtered': status_filtered
-    }
+    else:
+        context = {
+            'status_filtered': status_filtered
+        }
 
-    return render(request, 'pages/status_select.html', context)
+        return render(
+            request,
+            'pages/status_select.html',
+            context
+        )
 
 

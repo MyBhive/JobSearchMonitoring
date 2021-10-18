@@ -4,10 +4,14 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 
 
 class CustomUserManager(BaseUserManager):
-    """Define a model manager for User model with no username field."""
-
+    """
+    Define a model manager for User model with no username field.
+    """
     def _create_user(self, email, password=None, **extra_fields):
-        """Create and save a User with the given email and password."""
+        """
+        Create and save a User
+        with the given email and password.
+        """
         if not email:
             raise ValueError('The given email must be set')
         email = self.normalize_email(email)
@@ -22,7 +26,10 @@ class CustomUserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
     def create_superuser(self, email, password=None, **extra_fields):
-        """Create and save a SuperUser with the given email and password."""
+        """
+        Create and save a SuperUser
+         with the given email and password.
+        """
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
 
@@ -35,7 +42,10 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractUser):
-    """This model override the 'django user model' that we can work on it"""
+    """
+    This model override the
+    'django user model' that we can work on it
+    """
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField(default=None, null=True)
