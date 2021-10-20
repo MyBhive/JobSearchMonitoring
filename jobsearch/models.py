@@ -71,7 +71,7 @@ class JobOffer(models.Model):
     Class to create a table for jobs sheets
     """
     title = models.CharField(
-        max_length=100
+        max_length=100, verbose_name='Job'
     )
     company_name = models.CharField(
         max_length=150,
@@ -99,16 +99,16 @@ class JobOffer(models.Model):
     motiv_letter = models.FileField(
         null=True,
         blank=True,
-        upload_to='files/'
+        upload_to='files/', verbose_name='Letter of Motivation'
     )
     cv = models.FileField(
         null=True,
         blank=True,
-        upload_to='files/'
+        upload_to='files/', verbose_name='CV'
     )
     category_id = models.ForeignKey(
         Categories,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE, verbose_name='Category'
     )
     user_id = models.ForeignKey(
         CustomUser,
@@ -116,15 +116,15 @@ class JobOffer(models.Model):
     )
     status_id = models.ForeignKey(
         Status,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE, verbose_name='Job Status'
     )
     style_id = models.ForeignKey(
         StyleOfContract,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE, verbose_name='Job style'
     )
     type_id = models.ForeignKey(
         TypeOfContract,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE, verbose_name='Job type'
     )
 
     def __str__(self):
