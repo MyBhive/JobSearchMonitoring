@@ -30,7 +30,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
             <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="{% url 'home' %}">
+                <a class="navbar-brand js-scroll-trigger" title="Back to Homepage" href="{% url 'home' %}">
                     <img src="/static/assets/img/logo.png"
                          alt="jobresearch" WIDTH=40 HEIGHT=40 class="d-inline-block align-center" /> FAST JobResearch
                 </a>
@@ -45,15 +45,21 @@
                         {% if request.user.is_authenticated %}
 
                         <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" title="categories" href="{% url 'see_categories' %}" style="color: black;">My categories
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" title="Add Job" href="{% url 'add_job' %}" style="color: black;">Add Job
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="{% url 'my_account' %}">
                                 <i title="my account" class="fas fa-user-circle fa-2x mb-0" style="color: black;"></i>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="{% url 'see_categories' %}" class="form-inline-center">
-                                <i title="categories" class="fas fa-save fa-2x mb-0"  style="color: black;"></i>
-                            </a>
-                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="{% url 'log_out' %}">
                                 <i title="log out" class="fas fa-share-square fa-2x mb-0" style="color: black;"></i>
@@ -82,7 +88,7 @@
         {% block contenu %} {% endblock %}
 
         <!-- Footer-->
-        <footer class="bg-light py-5" style="background-color:#c45525">
+        <footer class=" bg-light py-5" style="background-color:#c45525">
             <div class="container d1-flex" >
                 <div class="small text-center text-muted">
                     <a href="{% url 'legal_notices' %}" id="mentions_legales">Mentions légales</a>
