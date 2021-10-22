@@ -7,40 +7,65 @@
     <div class="container h-100">
         <div class="d-flex justify-content-center h-100">
             <div class="user_card my-auto" style="width: auto;">
-                <div class="d-flex justify-content-center pb-4 text-white">
-                    <h1 class="d-block text-center mb-5 text-white" 
-                    style="margin-top: 4rem; text-shadow: 5px 1px 5px black, 0 0 25px black, 0 0 10px black;">
-                    Job saved </h1>
+                <div class="d-flex justify-content-center pb-4">
+                    <h1 class="d-block text-center mb-5" 
+                    style="color: #798398; margin-top: 4rem; text-shadow: 1px 1px black;">
+                    Job saved</h1>
                 </div>
             </div>
         </div>
     </div>
 </header>
-<ul class="nav">
+<ul class="nav justify-content-center">
+    {% for element in status.all_status %}
     <li class="nav-item">
-      <a class="nav-link active" href="#">Active</a>
-    </li>
-        {% for element in status %}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'status_select' element.id %}">{{ element }}</a>
-        {% endfor %}
+        <button type="button" class="btn btn-outline-secondary ml-2">
+          <a class="nav-link" href="{% url 'status_select' element.id status.category_concerned %}">{{ element }}</a>
+        </button>
+      </li>
+    {% endfor %}
   </ul>
 <section class="page-section">
     <div class="container">
-        <div>
-        </div>
-        <div>
-            <ul>
-                {% for element in jobs %}
-                    <li><a href="{% url 'job_detail' element.pk %}"> {{ element.title }}</a><br/>
-                    {{ element.company_name }}<br/>
-                    {{ element.status_id }}
-                    {{ element.type_id }}
-                    {{ element.style_id }}<br/>
-                    {{ element.category_id_id }}<br/>
-                    {{ id_cat }}
-                {% endfor %}
-            </ul>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col"><strong style="color: #C67A2E;">Job</strong></th>
+                <th scope="col"><strong style="color: #C67A2E;">Company name</strong></th>
+                <th scope="col"><strong style="color: #C67A2E;">Kind of contract</strong></th>
+                <th scope="col"><strong style="color: #C67A2E;">Job status</strong></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>
+              
+            </thead>
+            {% for element in jobs %}
+            <tbody>
+              <tr>
+                <th scope="row">{{ element.title }}</th>
+                <td class="mt-2">{{ element.company_name }}</td>
+                <td>{{ element.type_id }} - {{ element.style_id }}</td>
+                <td>{{ element.status_id }}</td>
+                <th><a href="{% url 'job_detail' element.pk %}" class="btn btn-primary mt-2" style="background-color: #C67A2E;">Description</a>
+                </th>
+                <th><a href="{% url 'update_job' element.pk %}" class="form-inline-center">
+                    <button type="submit" class="btn btn-outline-secondary ml-2  mt-2" >Edit</button></a>
+                </th>
+                <th>
+                  <a href="{% url 'delete_job' element.pk %}" class="form-inline-center">
+                    <button name="delete" id="button_send"  type="submit" class="btn btn-secondary ml-2 mt-2">
+                      <i class="fas fa-trash-alt" aria-hidden="true"></i></button>
+                </a>
+              </th>
+              </tr>
+            </tbody>
+            {% endfor %}
+          </table>
+          <br>
+          <div class="justify-content-center mt-5">
+            <a href="{% url 'see_categories' %}">
+                <i class="fas fa-arrow-circle-left fa-2x mb-0" style="color: black;"></i>
+            </a>
         </div>
     </div>
 </section>
