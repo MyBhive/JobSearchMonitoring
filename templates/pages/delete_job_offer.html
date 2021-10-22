@@ -7,9 +7,9 @@
     <div class="container h-100">
         <div class="d-flex justify-content-center h-100">
             <div class="user_card my-auto" style="width: auto;">
-                <div class="d-flex justify-content-center pb-4 text-white">
-                    <h1 class="d-block text-center mb-5 text-white" 
-                    style="margin-top: 4rem; text-shadow: 5px 1px 5px black, 0 0 25px black, 0 0 10px black;">
+                <div class="d-flex justify-content-center pb-4">
+                    <h1 class="d-block text-center mb-5" 
+                    style="color: #798398; margin-top: 4rem; text-shadow: 1px 1px black;">
                     Delete {{ joboffer.title }}</h1>
                 </div>
             </div>
@@ -20,9 +20,18 @@
     <div class="container">
         <form method="POST">
             {% csrf_token %}
-            <strong>Are you sure you want to delete {{ joboffer.title }}</strong>
+            <strong>Are you sure you want to delete "{{ joboffer.title }}"</strong>
             <button type="submit" class="btn btn-secondary">Delete</button>
         </form>
+    </div>
+</section>
+<section class="page-section">
+    <div class="container">
+        <div class="justify-content-center mt-5">
+            <a href="{% url 'job_description' joboffer.category_id_id %}">
+                <i class="fas fa-arrow-circle-left fa-2x mb-0" style="color: black;"></i>
+            </a>
+        </div>
     </div>
 </section>
 
