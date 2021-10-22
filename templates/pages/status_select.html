@@ -7,24 +7,51 @@
     <div class="container h-100">
         <div class="d-flex justify-content-center h-100">
             <div class="user_card my-auto" style="width: auto;">
-                <div class="d-flex justify-content-center pb-4 text-white">
-                    <h1 class="d-block text-center mb-5 text-white"
-                    style="margin-top: 4rem; text-shadow: 5px 1px 5px black, 0 0 25px black, 0 0 10px black;">
-                    status</h1>
+                <div class="d-flex justify-content-center pb-4">
+                    <h1 class="d-block text-center mb-5"
+                    style="color: #798398; margin-top: 4rem; text-shadow: 1px 1px black;">
+                    Status</h1>
                 </div>
             </div>
         </div>
     </div>
 </header>
-<section class="page-section">
+<section class="page-section" id="services">
     <div class="container">
         {% for message in messages %}
-        <p class="d-flex justify-content-center mt-4 " style="color: #ec081b;">{{message}}</p>
+        <h2 class="text-center mt-0">{{ message }}</h2>
+        <hr class="divider my-4" />
         {% endfor %}
-        {% for element in status_filtered %}
-        <p>{{ element.title }}</p>
-        {% endfor %}
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 text-center">
+                <div class="mt-5">
+                    <i class="fas fa-4x fa-laptop-code text-primary mb-4" style="color: #798398;"></i>
+                    {% for element in status_filtered %}
+                    <div class="card">
+                        <div class="card-header">
+                            <a href="{% url 'job_detail' element.pk %}"> <h5 style="color: black; text-shadow: 1px 1px #798398;">{{ element.title }}</h5></a>
+                        </div>
+                        <div class="card-body">
+                          <p class="card-text text-justify px-5"><strong style="color: #C67A2E;">Company name:</strong>  "{{ element.company_name }}"</p>
+                          <p class="card-text text-justify px-5"><strong style="color: #C67A2E;">Kind of contract:</strong> {{ element.type_id }} - {{ element.style_id }}</p>
+                          <p class="card-text text-justify px-5"><strong style="color: #C67A2E;">Job status:</strong> {{ element.status_id }}</p>
+        
+                          <a href="{% url 'job_detail' element.pk %}" class="btn btn-secondary">Description</a>
+                          <a href="{% url 'update_job' element.pk %}" class="form-inline-center">
+                              <button type="submit" class="btn btn-outline-secondary ml-2">Edit</button></a>
+                        </div>
+                      </div>
+                      <br/>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="justify-content-center mt-5 mx-5">
+            <a href="{% url 'job_description' category_concerned %}">
+                <i class="fas fa-arrow-circle-left fa-2x mb-0" style="color: black;"></i>
+            </a>
+        </div>
     </div>
 </section>
-
 {% endblock %}
