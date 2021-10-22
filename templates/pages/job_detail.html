@@ -7,10 +7,10 @@
     <div class="container h-100">
         <div class="d-flex justify-content-center h-100">
             <div class="user_card my-auto" style="width: auto;">
-                <div class="d-flex justify-content-center pb-4 text-white">
-                    <h1 class="d-block text-center mb-5 text-white" 
-                    style="margin-top: 4rem; text-shadow: 5px 1px 5px black, 0 0 25px black, 0 0 10px black;">
-                    {{ object.title }}  -  {{ object.category_id_id }}  -  {{ user.id }}</h1>
+                <div class="d-flex justify-content-center pb-4">
+                    <h1 class="d-block text-center mb-5" 
+                    style="color: #798398; margin-top: 4rem; text-shadow: 1px 1px black;">
+                    {{ object.title }}</h1>
                 </div>
             </div>
         </div>
@@ -18,27 +18,50 @@
 </header>
 <section class="page-section">
     <div class="container" method="POST" enctype="multipart/form-data">
-        <p> the company name is: {{ object.company_name }}<br/></p>
-        <p> click to the link: <a href='{{ object.url }}'> click</a></p>
-        <p> saving date: {{ object.date }}</p>
-        <p> salary: {{ object.salary }} euros</p>
-        <p> actual status: {{ object.status_id }}</p>
-        <p> contract: {{ object.style_id }} {{ object.type_id }}</p>
-        <p> comments: {{ object.comments }}</p>
-        {% if object.cv %}
-        <p> cv: <a href='{{ object.cv.url }}'> click</a></p>
-        {% endif %}
-        {% if object.motiv_letter %}
-        <p> motivation letter: <a href='{{ object.motiv_letter.url }}'> click</a></p>
-        {% endif %}
+        <ul class="list-group">
+            <li class="list-group-item" style="background-color: #f1f1f1; color: #646c7c; ">
+                <strong style="color: black;">Company name: </strong> {{ object.company_name }}</li>
+            <li class="list-group-item" style="color: #646c7c;">
+                <strong style="color: black;">Access the URL: </strong><a href='{{ object.url }}'> click</a>
+            </li>
+            <li class="list-group-item" style="background-color: #f1f1f1; color: #646c7c;">
+                <strong style="color: black;">Saving date: </strong> {{ object.date }}
+            </li>
+            <li class="list-group-item" style="color: #646c7c;">
+                <strong style="color: black;">Salary: </strong>{{ object.salary }} euros
+            </li>
+            <li class="list-group-item" style="background-color: #f1f1f1; color: #646c7c;">
+                <strong style="color: black;">Actual status: </strong> {{ object.status_id }}
+            </li>
+            <li class="list-group-item"  style="color: #646c7c;">
+                <strong style="color: black;">Contract :</strong>{{ object.style_id }} - {{ object.type_id }}
+            </li>
+            <li class="list-group-item" style="background-color: #f1f1f1; color: #646c7c;">
+                <strong style="color: black;">Comments: </strong>{{ object.comments }}
+            </li>
+            {% if object.cv %}
+            <li class="list-group-item" style="color: #646c7c;">
+                <strong style="color: #798398;">CV: </strong><a href='{{ object.cv.url }}'> click</a>
+            </li>
+            {% endif %}
+            {% if object.motiv_letter %}
+            <li class="list-group-item" style="background-color: #f1f1f1; color: #646c7c;">
+                <strong style="color: #798398;">Motivation letter:</strong><a href='{{ object.motiv_letter.url }}'> click</a>
+            </li>
+            {% endif %}
+          </ul> 
         <a href="{% url 'update_job' joboffer.pk %}" class="form-inline-center">
-            <hr>
-              <button type="submit" class="btn btn-primary ml-2">Edit</button>
+              <button type="submit" class="btn btn-primary ml-2  mt-3">Edit</button>
           </a>
           <a href="{% url 'delete_job' joboffer.pk %}" class="form-inline-center">
-            <hr>
-              <button type="submit" class="btn btn-primary ml-2">Delete</button>
+              <button name="delete" id="button_send"  type="submit" class="btn btn-secondary ml-2  mt-3">
+                  <i class="fas fa-trash-alt" aria-hidden="true"></i></button>
           </a>
+          <div class="justify-content-center mt-5">
+            <a href="{% url 'job_description' object.category_id_id %}">
+                <i class="fas fa-arrow-circle-left fa-2x mb-0" style="color: black;"></i>
+            </a>
+        </div>
     </div>
 </section>
 
