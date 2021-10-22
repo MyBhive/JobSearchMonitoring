@@ -4,56 +4,64 @@
 
 {% block contenu %}
 {% if not basic %}
-<header class="masthead" style="height: 50%; min-height: 50%;">
-  <div class="container h-100">
-      <div class="d-flex justify-content-center h-100">
-          <div class="user_card my-auto" style="width: auto;">
-              <div class="d-flex justify-content-center pb-4 text-white">
-                  <h1 class="d-block text-center mb-5 text-white" 
-                  style="margin-top: 4rem; text-shadow: 5px 1px 5px black, 0 0 25px black, 0 0 10px black;">
-                  {{ title }} {{ id_cat }}</h1>
-              </div>
-          </div>
-      </div>
-  </div>
-</header>
-<section class="my-5" style="height: 30%; min-height: 30%;">
-  <div class="card mx-auto align-items-center text-center" style="width:300px; margin: 64px 2px 64px 2px; padding: 0.5rem;">
-    <a href="{% url 'add_job' id_cat %}">
-      <h3>Create job offer</h3>
-    </a>
-  </div>
-</section>
-{% else %}
-<header class="masthead" style="height: 50%; min-height: 50%;">
-  <div class="container h-100">
-      <div class="d-flex justify-content-center h-100">
-          <div class="user_card my-auto" style="width: auto;">
-              <div class="d-flex justify-content-center pb-4 text-white">
-                  <h1 class="d-block text-center mb-5 text-white" 
-                  style="margin-top: 4rem; text-shadow: 5px 1px 5px black, 0 0 25px black, 0 0 10px black;">
-                  {{ title }}</h1>
-              </div>
-          </div>
-      </div>
-  </div>
-</header>
-<section class="my-5" style="height: 30%; min-height: 30%;">
-  <div class="col-lg-10 mx-auto d-flex" style="margin: 64px 2px 64px 2px;">
+  <header class="masthead" style="max-height: 20rem;">
+    <div class="container h-100">
+        <div class="d-flex justify-content-center h-100">
+            <div class="user_card my-auto" style="width: auto;">
+                <div class="d-flex justify-content-center pb-4">
+                    <h1 class="d-block text-center mb-5" 
+                    style="color: #798398; margin-top: 4rem; text-shadow: 1px 1px black;">
+                    {{ title }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+  </header>
+  <section class="page-section" my-5>
+    <div class="container"> 
       <div class="card mx-auto align-items-center text-center" style="width:300px; margin: 64px 2px 64px 2px; padding: 0.5rem;">
-        <a href="{% url 'job_description' id_cat %}">
-          <h3>See the job offer(s) {{ id_cat }}</h3>
-        </a>
-      </div>
-
-      <div class="card mx-auto align-items-center text-center" style="width:300px; margin: 64px 2px 64px 2px; padding: 0.5rem;">
-        <a href="{% url 'add_job' id_cat %}">
+        <a href="{% url 'add_job' %}">
           <h3>Create job offer</h3>
         </a>
       </div>
+    </div>
+  </section>
+  {% else %}
+  <header class="masthead" style="max-height: 20rem;">
+    <div class="container h-100">
+        <div class="d-flex justify-content-center h-100">
+            <div class="user_card my-auto" style="width: auto;">
+                <div class="d-flex justify-content-center pb-4">
+                    <h1 class="d-block text-center mb-5" 
+                    style="color: #798398; margin-top: 4rem; text-shadow: 1px 1px black;">
+                    {{ title }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+  </header>
+  <section class="page-section my-5">
+    <div class="container">
+    <div class="col-lg-10 mx-auto d-flex" style="margin: 64px 2px 64px 2px;">
+        <div class="card mx-auto align-items-center text-center" style="width:300px; margin: 64px 2px 64px 2px; padding: 0.5rem;">
+          <a href="{% url 'job_description' id_cat %}">
+            <h3>See the job offer(s)</h3>
+          </a>
+        </div>
 
-</div>
-</section>
+        <div class="card mx-auto align-items-center text-center" style="width:300px; margin: 64px 2px 64px 2px; padding: 0.5rem;">
+          <a href="{% url 'add_job' %}">
+            <h3>Create job offer</h3>
+          </a>
+        </div>
+    </div>
+    <div class="justify-content-center mt-5 mx-5">
+      <a href="{% url 'see_categories' %}">
+          <i class="fas fa-arrow-circle-left fa-2x mb-0" style="color: black;"></i>
+      </a>
+    </div>
+    </div>
+  </section>
 
 {% endif %}
 {% endblock %}
