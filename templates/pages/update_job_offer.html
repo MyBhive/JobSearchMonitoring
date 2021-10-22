@@ -7,9 +7,9 @@
     <div class="container h-100">
         <div class="d-flex justify-content-center h-100">
             <div class="user_card my-auto" style="width: auto;">
-                <div class="d-flex justify-content-center pb-4 text-white">
-                    <h1 class="d-block text-center mb-5 text-white" 
-                    style="margin-top: 4rem; text-shadow: 5px 1px 5px black, 0 0 25px black, 0 0 10px black;">
+                <div class="d-flex justify-content-center pb-4">
+                    <h1 class="d-block text-center mb-5" 
+                    style="color: #798398; margin-top: 4rem; text-shadow: 1px 1px black;">
                     Edit job offer</h1>
                 </div>
             </div>
@@ -21,8 +21,12 @@
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" value="Upload File" class="btn btn-secondary">Update</button>
+            <button type="submit" value="Upload File" class="btn btn-primary">Update</button>
         </form>
+        <a href="{% url 'delete_job' joboffer.pk %}" class="form-inline-center">
+            <button name="delete" id="button_send"  type="submit" class="btn btn-secondary m-5">
+                <i class="fas fa-trash-alt" aria-hidden="true"></i></button>
+        </a>
     </div>
 </section>
 
