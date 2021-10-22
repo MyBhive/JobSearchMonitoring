@@ -42,7 +42,7 @@ urlpatterns = [
          JobOfferDetailView.as_view(),
          name='job_detail'
          ),
-    path('add_job/<int:id_cat>',
+    path('add_job',
          CreateJobOffer.as_view(),
          name='add_job'
          ),
@@ -54,7 +54,7 @@ urlpatterns = [
          DeleteJobOffer.as_view(),
          name='delete_job'
          ),
-    path('status/<str:status_id>',
+    path('status/<str:status_id>/<str:catid>',
          views.select_status,
          name='status_select'
          )
