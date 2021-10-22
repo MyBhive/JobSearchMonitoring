@@ -159,6 +159,8 @@ def delete_category(request, cat_id):
 def job_offers_views(request, cate_id):
     """
     Function to render the jobs attached to a category
+    No conditions have been made because
+    the view is not called if there no job_offer to show
     """
     user = request.user
     jobs = JobOffer.objects.filter(
@@ -166,7 +168,13 @@ def job_offers_views(request, cate_id):
         category_id_id=cate_id
     ).order_by('date')
 
-    status = Status.objects.all()
+    all_status = Status.objects.all()
+    category_concerned = cate_id
+
+    status = {
+        'all_status': all_status,
+        'category_concerned': category_concerned
+    }
 
     context = {
         'jobs': jobs,
@@ -212,7 +220,7 @@ class UpdateJobOffer(UpdateView):
 
 class DeleteJobOffer(DeleteView):
     """
-    Class with basicview
+    Class with basic view
     to delete a specific job offer
     """
     model = JobOffer
@@ -221,7 +229,7 @@ class DeleteJobOffer(DeleteView):
 
 
 @login_required(login_url='login')
-def select_status(request, status_id):
+def select_status(request, status_id, catid):
     """
     Method to select a status and paginate all
     the job offer belonging to this status
@@ -229,9 +237,11 @@ def select_status(request, status_id):
     user = request.user
     status_filtered = JobOffer.objects.filter(
         user_id=user,
+        category_id=catid,
         status_id=status_id)\
         .order_by('date'
                   )
+
     if not status_filtered:
         messages.info(
             request,
@@ -241,7 +251,8 @@ def select_status(request, status_id):
 
     else:
         context = {
-            'status_filtered': status_filtered
+            'status_filtered': status_filtered,
+            'category_concerned': catid
         }
 
         return render(
