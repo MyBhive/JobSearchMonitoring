@@ -18,4 +18,3 @@ class UserAdminCreationForm(UserCreationForm):
             'password2',
             'date_of_birth'
         ]
-

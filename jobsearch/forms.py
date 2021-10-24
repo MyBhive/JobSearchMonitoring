@@ -1,5 +1,5 @@
 ﻿from django import forms
-from .models import JobOffer
+from .models import JobOffer, Categories
 
 
 class JobOfferForm(forms.ModelForm):
@@ -30,3 +30,9 @@ class JobOfferForm(forms.ModelForm):
             'style_id': forms.Select(attrs={'class': 'form-control'}),
             'type_id': forms.Select(attrs={'class': 'form-control'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(JobOfferForm, self).__init__(*args, **kwargs)
+        self.fields['category_id'].queryset = \
+            Categories.objects.filter(user_id=user)
