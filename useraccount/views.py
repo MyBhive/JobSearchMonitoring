@@ -80,4 +80,3 @@ def my_account(request):
         request,
         'userpages/my_account.html'
     )
-
