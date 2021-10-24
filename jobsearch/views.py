@@ -1,6 +1,7 @@
 # coding: utf-8
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
-from jobsearch.models import *
+from jobsearch.models import Categories, JobOffer, Status
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
@@ -197,7 +198,7 @@ class JobOfferDetailView(DetailView):
     template_name = 'pages/job_detail.html'
 
 
-class CreateJobOffer(CreateView):
+class CreateJobOffer(LoginRequiredMixin, CreateView):
     """
     Class with basicview to render
     a formular for creating a job offer
@@ -206,8 +207,13 @@ class CreateJobOffer(CreateView):
     form_class = JobOfferForm
     template_name = 'pages/add_job.html'
 
+    def get_form_kwargs(self):
+        kwargs = super(CreateJobOffer, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
-class UpdateJobOffer(UpdateView):
+
+class UpdateJobOffer(LoginRequiredMixin, UpdateView):
     """
     Class with basicview to render
     a formular to update
@@ -216,6 +222,11 @@ class UpdateJobOffer(UpdateView):
     model = JobOffer
     form_class = JobOfferForm
     template_name = 'pages/update_job_offer.html'
+
+    def get_form_kwargs(self):
+        kwargs = super(UpdateJobOffer, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
 
 class DeleteJobOffer(DeleteView):
@@ -242,11 +253,8 @@ def select_status(request, status_id, catid):
         .order_by('date'
                   )
 
-    if not status_filtered:
-        messages.info(
-            request,
-            'No jobs saved under this status yet'
-        )
+    if not catid:
+
         return render(request, 'pages/status_select.html')
 
     else:
@@ -260,5 +268,3 @@ def select_status(request, status_id, catid):
             'pages/status_select.html',
             context
         )
-
-
