@@ -1,7 +1,10 @@
 from django.test import SimpleTestCase
-from django.urls import reverse, resolve
+from django.urls import resolve, reverse
 from django.contrib.auth import get_user_model
-from jobsearch.views import *
+from jobsearch.views import enter_category, \
+    delete_category, \
+    job_offers_views, \
+    select_status
 
 User = get_user_model()
 
@@ -27,14 +30,6 @@ class TestUrls(SimpleTestCase):
         self.assertEqual(resolve('/contact')._func_path,
                          'jobsearch.views.contact')
 
-    def test_enter_category_is_linked_to_good_url_and_views(self):
-        url = reverse("enter_category", args=['id_cat'])
-        self.assertEquals(resolve(url).func, enter_category)
-
-    def test_delete_category_is_linked_to_good_url_and_views(self):
-        url = reverse("delete_category", args=['cat_id'])
-        self.assertEquals(resolve(url).func, delete_category)
-
     def test_add_category_is_linked_to_good_url_and_views(self):
         self.assertEqual(reverse('add_categories'), '/add_categories')
         self.assertEqual(resolve('/add_categories')._func_path,
@@ -45,12 +40,42 @@ class TestUrls(SimpleTestCase):
         self.assertEqual(resolve('/see_categories')._func_path,
                          'jobsearch.views.see_categories')
 
+    def test_enter_category_is_linked_to_good_url_and_views(self):
+        url = reverse("enter_category", args=['id_cat'])
+        self.assertEquals(resolve(url).func, enter_category)
 
-# add_job_offer
-# modify_job_offer
-# select_status ( status_id))
-# see_job_offer
-# delete_job_offer (job_id)
-    # def test_product_info_url_resolves(self):
-      #  url = reverse("product_info", args=['description'])
-      #  self.assertEquals(resolve(url).func, product_info)
+    def test_delete_category_is_linked_to_good_url_and_views(self):
+        url = reverse("delete_category", args=['cat_id'])
+        self.assertEquals(resolve(url).func, delete_category)
+
+    def test_job_offer_views_is_linked_to_good_url_and_views(self):
+        url = reverse("job_description", args=['cate_id'])
+        self.assertEquals(resolve(url).func, job_offers_views)
+
+    def test_job_offer_detail_view_is_linked_to_good_url_and_views(self):
+        self.assertEqual(reverse(
+            'job_detail', args=['1']),
+            '/job_detail/1'
+        )
+
+    def test_update_job_offer_is_linked_to_good_url_and_views(self):
+        self.assertEqual(reverse(
+            'update_job', args=['1']),
+            '/job_detail/edit/1'
+        )
+
+    def test_add_job_offer_is_linked_to_good_url_and_views(self):
+        self.assertEqual(reverse(
+            'add_job'),
+            '/add_job'
+        )
+
+    def test_delete_job_offer_is_linked_to_good_url_and_views(self):
+        self.assertEqual(reverse(
+            'delete_job', args=['1']),
+            '/job_detail/1/delete'
+        )
+
+    def test_select_status_is_linked_to_good_url_and_views(self):
+        url = reverse("status_select", args=['status_id', 'catid'])
+        self.assertEquals(resolve(url).func, select_status)

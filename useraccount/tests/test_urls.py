@@ -54,5 +54,6 @@ class TestUrls(TestCase):
             'password_reset_confirm', args=['uidb64', 'token']),
             '/password_reset_confirm/uidb64/token/'
         )
-        self.assertEqual(resolve('/password_reset_confirm/uidb64/token/')._func_path,
+        self.assertEqual(resolve
+                         ('/password_reset_confirm/uidb64/token/')._func_path,
                          'django.contrib.auth.views.PasswordResetConfirmView')
