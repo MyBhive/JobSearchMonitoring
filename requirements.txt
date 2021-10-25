@@ -27,9 +27,6 @@ MarkupSafe==1.1.1
 mccabe==0.6.1
 micropython-fcntl==0.0.3
 micropython-ffilib==0.1.2
-mysql==0.0.2
-mysql-connector-python==8.0.23
-mysqlclient==2.0.3
 packaging==20.9
 pipenv==2020.11.15
 pluggy==0.13.1
