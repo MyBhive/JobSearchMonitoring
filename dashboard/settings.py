@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'jobsearch',
-    'useraccount'
+    'useraccount',
 ]
 
 AUTH_USER_MODEL = 'useraccount.CustomUser'
