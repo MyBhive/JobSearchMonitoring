@@ -135,3 +135,26 @@ class JobOffer(models.Model):
             'job_detail',
             kwargs={"pk": self.pk}
         )
+
+
+def creating_db_setup():
+    Status.objects.create(advanced='CV sent')
+    Status.objects.create(advanced='To apply')
+    Status.objects.create(advanced='Positive answer')
+    Status.objects.create(advanced='Negative answer')
+    Status.objects.create(advanced='Job interview')
+    TypeOfContract.objects.create(type='Permanent')
+    TypeOfContract.objects.create(type='Fixed-term')
+    TypeOfContract.objects.create(type='Permanent')
+    TypeOfContract.objects.create(type='Working student')
+    TypeOfContract.objects.create(type='Internship')
+    TypeOfContract.objects.create(type='Freelance')
+    TypeOfContract.objects.create(type='Casual')
+    TypeOfContract.objects.create(type='Others')
+    StyleOfContract.objects.create(style='Full time')
+    StyleOfContract.objects.create(style='Part time')
+    StyleOfContract.objects.create(style='Casual')
+    StyleOfContract.objects.create(style='Others')
+
+
+
