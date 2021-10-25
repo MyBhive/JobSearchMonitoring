@@ -1,26 +1,24 @@
-﻿# coding: utf-8
-
-STATUS = [
-    "cv-envoye",
-    "a-postuler",
-    "reponse-positive",
-    "reponse-negative",
-    "entretien"
+﻿STATUS = [
+    'CV sent',
+    'To apply',
+    'Positive answer',
+    'Negative answer',
+    'Job interview'
 ]
 
-TYPE_OF_CONTRACT = [
-    "CDI",
-    "CDD",
-    "stage",
-    "interim",
-    "freelance",
-    "extra",
-    "autres"
+TYPE = [
+    'Permanent',
+    'Fixed-term',
+    'Working student',
+    'Internship',
+    'Freelance',
+    'Casual',
+    'others'
 ]
 
-STYLE_OF_CONTRACT = [
-    "temps-plein",
-    "temps-partiel",
-    "extra",
-    "autres"
+STYLE = [
+    'Full time',
+    'Part time',
+    'Casual',
+    'others'
 ]
