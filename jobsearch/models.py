@@ -1,6 +1,6 @@
 # coding: utf-8
 from django.db import models
-from django.conf import settings
+from useraccount.models import CustomUser
 from django.urls import reverse
 
 
@@ -14,7 +14,7 @@ class Categories(models.Model):
         unique=True
     )
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        CustomUser,
         on_delete=models.CASCADE
     )
 
@@ -111,7 +111,7 @@ class JobOffer(models.Model):
         on_delete=models.CASCADE, verbose_name='Category'
     )
     user_id = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        CustomUser,
         on_delete=models.CASCADE
     )
     status_id = models.ForeignKey(
