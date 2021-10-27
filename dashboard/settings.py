@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False if os.environ.get('ENV') == 'production' else True
+DEBUG = False if os.environ.get('ENV', 'development') == 'production' else True
 
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "fast-jobresearch.herokuapp.com"]
