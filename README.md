@@ -1,7 +1,7 @@
-# ****JobSearchMonitoring****
+# 	****JobSearchMonitoring****
 
 
-> This app is a personal follow-up on your job research.
+> This App is a personal follow-up on your job research.
 >
 > Find a job on your favorites web pages, save it in your database and enjoy the clarity of the organization.
 >
@@ -11,20 +11,18 @@
 >
 > create a job offer:
 >
-> ```
-> category (choose one of the category you created)
-> title (job offer name)
-> company_name
-> url (link to the job offer from where you fin it (ex: linkedin, monster, indeed...))
-> date (auto implement at the creation) 
-> salary (in euro)
-> comments 
-> updolad a motivation letter 
-> upload you cv
-> status ()
-> style ()
-> type ()
-> ```
+> - ***\*category (choose one of the category you created)\****
+> - ***\*title (job offer name)\****
+> - ***\*company_name\****
+> - ***\*URL (link to the job offer from where you fin it (ex: linked-in, monster, indeed...))\****
+> - ***\*date (auto implement at the creation)\**** 
+> - ***\*salary (in Euro)\****
+> - ***\*comments\**** 
+> - ***\*upload a motivation letter\**** 
+> - ***\*upload you CV\****
+> - ***\*status (select one)\****
+> - ***\*style (choose a style of job)\****
+> - ***\*type (choose a type of job)\****
 
 ---------------------------------------------------------------------------------------------
 
@@ -87,6 +85,10 @@
 
 - Django 3
 
+- AWS S3
+
+- PostgreSQL
+
   
 
 `Launched:`
@@ -95,7 +97,7 @@ Django 3
 
 
 `Fork:`
-https://github.com/MyBhive/NutellaLovers.git
+https://github.com/MyBhive/JobSearchMonitoring.git
 
 -----------------------------------------------------------------------------------------------
 
@@ -109,34 +111,41 @@ https://github.com/MyBhive/NutellaLovers.git
 
 `Back-end files and folders`
 
-| [ROOT]()              | --------------------------------------------------------------------- |
-| --------------------- | ------------------------------------------------------------ |
-| **requirement.txt**   | File to install “requirement.txt                             |
-|                       |                                                              |
-| **MYSITE FOLDER**[]() | **---------------------------------------------------------------------** |
-| **mysite**            |                                                              |
-| **account**           | account feature                                              |
-| **purbeure**          | products feature                                             |
-| **static**            | CSS / Javascript                                             |
-| **templates**         | html                                                         |
-| **manage.py**         | main file                                                    |
+| [ROOT]()            | --------------------------------------------------------------------- |
+| ------------------- | ------------------------------------------------------------ |
+| **requirement.txt** | File to install “requirement.txt                             |
+|                     |                                                              |
+|                     | **---------------------------------------------------------------------** |
+| **dashboard**       | settings                                                     |
+| **useraccount**     | account feature                                              |
+| **jobsearch**       | products feature                                             |
+| **static**          | CSS / Javascript/ asset-img                                  |
+| **templates**       | html pages/userpages                                         |
+| **manage.py**       | main file                                                    |
 
 `Front-end files`
 
 | **TEMPLATES FOLDER**[]() | --------------------------------------------------------------------- |
 | ------------------------ | ------------------------------------------------------------ |
-| **page**                 | templates of the products thema                              |
-| **userpage**             | templates of the user acount thema                           |
+| **page**s                | templates of the products thema                              |
+| **userpages**            | templates of the user acount thema                           |
 | **STATIC FOLDER**[]()    | **---------------------------------------------------------------------** |
 | **script.js**            | File containing all the Javascript coding                    |
 | **style.css**            | File containing all the CSS coding                           |
-| **img**                  | folder containing all the picture used on the homepage       |
+| **asset/img**            | folder containing all the picture used on the homepage       |
 
 `Text files`
 
-| **Requirement.txt** |      |
-| ------------------- | ---- |
-|                     |      |
+| **Requirement.txt**      |      |
+| ------------------------ | ---- |
+| packages used to the app |      |
+
+​	`Installation files`
+
+| **.gitignore** | to filter what should be visible |
+| -------------- | -------------------------------- |
+| **Procfile**   | to connect with **heroku**       |
+|                |                                  |
 
 ​	
 
@@ -164,4 +173,3 @@ https://github.com/MyBhive/NutellaLovers.git
 
 > MyBhive 
 
-*My most sincere thanks to Geoffrey. He helped me when I was lost, teaching me the logic of testing. He also support me spychologically in my difficulties that I don't depress and gain weight eating peanuts butter with a spoon!
