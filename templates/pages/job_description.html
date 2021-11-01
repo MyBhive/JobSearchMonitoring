@@ -27,14 +27,16 @@
   </ul>
 <section class="page-section">
     <div class="container">
+      <div class="table-responsive">
         <table class="table table-striped">
             <thead>
               <tr>
                 <th scope="col"><strong style="color: #C67A2E;">Job</strong></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
                 <th scope="col"><strong style="color: #C67A2E;">Company name</strong></th>
                 <th scope="col"><strong style="color: #C67A2E;">Kind of contract</strong></th>
                 <th scope="col"><strong style="color: #C67A2E;">Job status</strong></th>
-                <th scope="col"></th>
                 <th scope="col"></th>
               </tr>
               
@@ -43,24 +45,25 @@
             <tbody>
               <tr>
                 <th scope="row">{{ element.title }}</th>
-                <td class="mt-2">{{ element.company_name }}</td>
-                <td>{{ element.type_id }} - {{ element.style_id }}</td>
-                <td>{{ element.status_id }}</td>
-                <th><a href="{% url 'job_detail' element.pk %}" class="btn btn-primary mt-2" style="background-color: #C67A2E;">Description</a>
+                <th><a href="{% url 'job_detail' element.pk %}" class="btn btn-primary mt-2" style="background-color: #C67A2E;">See</a>
                 </th>
                 <th><a href="{% url 'update_job' element.pk %}" class="form-inline-center">
                     <button type="submit" class="btn btn-outline-secondary ml-2  mt-2" >Edit</button></a>
                 </th>
+                <td class="mt-2">{{ element.company_name }}</td>
+                <td>{{ element.type_id }} - {{ element.style_id }}</td>
+                <td>{{ element.status_id }}</td>
                 <th>
                   <a href="{% url 'delete_job' element.pk %}" class="form-inline-center">
                     <button name="delete" id="button_send"  type="submit" class="btn btn-secondary ml-2 mt-2">
                       <i class="fas fa-trash-alt" aria-hidden="true"></i></button>
-                </a>
+                  </a>
               </th>
               </tr>
             </tbody>
             {% endfor %}
           </table>
+        </div>
           <br>
           <div class="justify-content-center mt-5">
             <a href="{% url 'see_categories' %}">
