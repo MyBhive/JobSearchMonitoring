@@ -2,6 +2,7 @@
 from django.db import models
 from useraccount.models import CustomUser
 from django.urls import reverse
+from django.core.validators import MinValueValidator
 
 
 class Categories(models.Model):
@@ -87,9 +88,10 @@ class JobOffer(models.Model):
     )
     salary = models.DecimalField(
         max_digits=19,
-        decimal_places=3,
+        decimal_places=0,
         null=False,
-        blank=False
+        blank=False,
+        validators=[MinValueValidator(limit_value=0)]
     )
     comments = models.TextField(
         max_length=800,
