@@ -170,11 +170,10 @@ def job_offers_views(request, cate_id):
     ).order_by('date')
 
     all_status = Status.objects.all()
-    status_order = [all_status[1], all_status[0], all_status[4], all_status[2], all_status[3]]
     category_concerned = cate_id
 
     status = {
-        'all_status': status_order,
+        'all_status': all_status,
         'category_concerned': category_concerned
     }
 
